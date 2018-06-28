@@ -110,8 +110,8 @@ public class GameWidget extends StyledWidget implements Animation {
 		int x = g.getClipWidth() / 2;
 		int y = g.getClipHeight() - 20;
 		if (this.goalX == 0 && this.goalY == 0) {
-			this.goalX = x;
-			this.goalY = y;
+			this.goalX = g.getClipWidth() / 2;
+			this.goalY = g.getClipHeight() / 2;
 		}
 		g.drawImage(this.background, 0, 0, GraphicsContext.TOP | GraphicsContext.LEFT);
 		g.drawImage(this.but, this.goalX, this.goalY, GraphicsContext.TOP | GraphicsContext.LEFT);
@@ -245,10 +245,6 @@ public class GameWidget extends StyledWidget implements Animation {
 			}
 		}
 		return super.handleEvent(event);
-	}
-
-	private void initBallPosition(GraphicsContext g) {
-
 	}
 
 	private void initGoalsPosition() {
