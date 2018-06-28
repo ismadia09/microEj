@@ -1,0 +1,8 @@
+# Embed microej logo in RAW with 4 bits for Alpha, 4 bits for red, 4 bits for green, 4 bits for blue
+#images/microej_logo.png:ARGB4444
+
+# Embed bg compressed
+images/bg.png
+images/bgtest.png
+images/ball.png
+images/cage.png

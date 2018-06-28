@@ -1,0 +1,2 @@
+# Use MyFontLoader as default FontLoader
+#ej.style.font.loader.FontLoader=com.microej.MyFontLoader
