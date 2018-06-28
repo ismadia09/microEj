@@ -1,6 +1,8 @@
 package project.lab;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import ej.animation.Animation;
 import ej.animation.Animator;
@@ -77,6 +79,9 @@ public class GameWidget extends StyledWidget implements Animation {
 
 	private Image ball;
 	private Image but;
+	private int goalX = 0;
+	private int goalY = 0;
+	private final Timer timer;
 
 	public GameWidget() {
 		try {
@@ -87,26 +92,30 @@ public class GameWidget extends StyledWidget implements Animation {
 			e.printStackTrace();
 		}
 		this.model = new CircularBoundedRangeModel(0, 1000, 1000);
-	}
-
-	private void moveBall(GraphicsContext g) {
-		int x = 50;
-		int y = 50;
-		for (int i = 0; i < 100; i++) {
-			g.drawImage(this.ball, x, y, GraphicsContext.TOP | GraphicsContext.LEFT);
-			x += 2;
-			y += 8;
-		}
-
+		this.timer = new Timer();
+		this.timer.scheduleAtFixedRate(new TimerTask() {
+			@Override
+			public void run() {
+				// Your database code here
+				String goalCoordinates = "Goal : x = " + GameWidget.this.goalX + " y = " + GameWidget.this.goalY;
+				System.out.println(goalCoordinates);
+				initGoalsPosition();
+			}
+		}, 1000 * 1, 1000 * 1);
 	}
 
 	@Override
 	public void renderContent(GraphicsContext g, Style style, Rectangle bounds) {
 		// TODO Auto-generated method stub
+		int x = g.getClipWidth() / 2;
+		int y = g.getClipHeight() - 20;
+		if (this.goalX == 0 && this.goalY == 0) {
+			this.goalX = x;
+			this.goalY = y;
+		}
 		g.drawImage(this.background, 0, 0, GraphicsContext.TOP | GraphicsContext.LEFT);
-		// moveBall(g);
-		initBallPosition(g);
-		initGoalsPosition(g);
+		g.drawImage(this.but, this.goalX, this.goalY, GraphicsContext.TOP | GraphicsContext.LEFT);
+		g.drawImage(this.ball, x, y, GraphicsContext.TOP | GraphicsContext.LEFT);
 
 	}
 
@@ -239,20 +248,16 @@ public class GameWidget extends StyledWidget implements Animation {
 	}
 
 	private void initBallPosition(GraphicsContext g) {
-		int x = g.getClipWidth() / 2;
-		int y = g.getClipHeight() - 20;
-		g.drawImage(this.ball, x, y, GraphicsContext.TOP | GraphicsContext.LEFT);
+
 	}
 
-	private void initGoalsPosition(GraphicsContext g) {
-		int minX = 20;
-		int minY = 50;
-		int maxX = 480;
-		int maxY = 272;
-		// Random ran = new Random();
-		int x = (int) (minX + (Math.random() * (maxX - minX)));
-		int y = (int) (minY + (Math.random() * (maxY - minY)));
-		g.drawImage(this.but, x, y, GraphicsContext.TOP | GraphicsContext.LEFT);
+	private void initGoalsPosition() {
+		int minX = 0;
+		int minY = 0;
+		int maxX = 450;
+		int maxY = 252;
+		this.goalX = (int) (minX + (Math.random() * (maxX - minX)));
+		this.goalY = (int) (minY + (Math.random() * (maxY - minY)));
 
 	}
 
