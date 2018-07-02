@@ -81,6 +81,8 @@ public class GameWidget extends StyledWidget implements Animation {
 	private Image but;
 	private int goalX = 0;
 	private int goalY = 0;
+	private int ballonX = 0;
+	private int ballonY = 0;
 	private final Timer timer;
 
 	public GameWidget() {
@@ -101,21 +103,24 @@ public class GameWidget extends StyledWidget implements Animation {
 				System.out.println(goalCoordinates);
 				initGoalsPosition();
 			}
-		}, 1000 * 1, 1000 * 1);
+		}, 1000 * 2, 1000 * 2);
 	}
 
 	@Override
 	public void renderContent(GraphicsContext g, Style style, Rectangle bounds) {
 		// TODO Auto-generated method stub
-		int x = g.getClipWidth() / 2;
-		int y = g.getClipHeight() - 20;
+		if (this.ballonX == 0 && this.ballonY == 0) {
+			this.ballonX = g.getClipWidth() / 2;
+			this.ballonY = g.getClipHeight() - 20;
+		}
+
 		if (this.goalX == 0 && this.goalY == 0) {
 			this.goalX = g.getClipWidth() / 2;
 			this.goalY = g.getClipHeight() / 2;
 		}
 		g.drawImage(this.background, 0, 0, GraphicsContext.TOP | GraphicsContext.LEFT);
 		g.drawImage(this.but, this.goalX, this.goalY, GraphicsContext.TOP | GraphicsContext.LEFT);
-		g.drawImage(this.ball, x, y, GraphicsContext.TOP | GraphicsContext.LEFT);
+		g.drawImage(this.ball, this.ballonX, this.ballonY, GraphicsContext.TOP | GraphicsContext.LEFT);
 
 	}
 
@@ -238,8 +243,10 @@ public class GameWidget extends StyledWidget implements Animation {
 			this.animated = false;
 			if (Pointer.isPressed(event) || Pointer.isDragged(event)) {
 				Pointer pointer = (Pointer) Event.getGenerator(event);
-				this.model
-						.setValue(getValue(getRelativeX(pointer.getAbsoluteX()), getRelativeY(pointer.getAbsoluteY())));
+				// this.model.setValue(getValue(getRelativeX(pointer.getAbsoluteX()),
+				// getRelativeY(pointer.getAbsoluteY())));
+				this.ballonX = pointer.getX();
+				this.ballonY = pointer.getY();
 				repaint();
 				return true;
 			}
