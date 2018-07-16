@@ -19,6 +19,7 @@ import ej.style.container.Rectangle;
 import ej.style.util.StyleHelper;
 import ej.widget.StyledWidget;
 import project.model.CircularBoundedRangeModel;
+import project.pages.ProjectGameOver;
 import project.pages.ProjectGamePage;
 
 /**
@@ -86,6 +87,7 @@ public class GameWidget extends StyledWidget implements Animation {
 	private int ballonY = 0;
 	private int difficulty = 0;
 	public static int goalScored = 0;
+	private int missed = 0;
 	private final Timer timer;
 
 	public GameWidget(int difficulty) {
@@ -247,7 +249,7 @@ public class GameWidget extends StyledWidget implements Animation {
 	public boolean handleEvent(int event) {
 		if (Event.getType(event) == Event.POINTER) {
 			this.animated = false;
-			if (Pointer.isPressed(event) || Pointer.isDragged(event)) {
+			if (Pointer.isPressed(event)) {
 				Pointer pointer = (Pointer) Event.getGenerator(event);
 				// this.model.setValue(getValue(getRelativeX(pointer.getAbsoluteX()),
 				// getRelativeY(pointer.getAbsoluteY())));
@@ -295,6 +297,12 @@ public class GameWidget extends StyledWidget implements Animation {
 			ProjectGamePage.buts = this.goalScored++;
 			System.out.println("nombre de buts");
 			System.out.println(this.goalScored);
+		} else {
+			this.missed++;
+			if (this.missed >= 10) {
+				this.missed = 0;
+				ProjectActivity.show(new ProjectGameOver(this.goalScored, this.difficulty));
+			}
 		}
 	}
 

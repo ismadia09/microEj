@@ -35,6 +35,7 @@ public class ProjectGamePage extends Page {
 		sback.addOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick() {
+				GameWidget.goalScored = 0;
 				ProjectActivity.home();
 			}
 		});

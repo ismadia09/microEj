@@ -82,7 +82,7 @@ public class ProjectGameSettings extends Page {
 			@Override
 			public void onClick() {
 				// TODO Auto-generated method stub
-				ProjectActivity.show(new ProjectGamePage(5));
+				ProjectActivity.show(new ProjectGamePage(7));
 
 			}
 		});
@@ -91,7 +91,7 @@ public class ProjectGameSettings extends Page {
 			@Override
 			public void onClick() {
 				// TODO Auto-generated method stub
-				ProjectActivity.show(new ProjectGamePage(1));
+				ProjectActivity.show(new ProjectGamePage(3));
 
 			}
 		});
