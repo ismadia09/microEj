@@ -7,6 +7,7 @@
 package project.pages;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import ej.widget.basic.Label;
 import ej.widget.composed.ButtonWrapper;
@@ -46,8 +47,10 @@ public class ProjectGameScorePage extends Page {
 
 	public ProjectGameScorePage(ArrayList scoreList) {
 		list = new List(false);
+		Collections.sort(scoreList);
+		Collections.reverse(scoreList);
 		for (int i = 0; i < scoreList.size(); i++) {
-			Label lbl = new Label("ISMA-ITEM-" + scoreList.get(i));
+			Label lbl = new Label(scoreList.get(i) + " buts");
 			lbl.addClassSelector("ITEM");
 			list.add(lbl);
 		}

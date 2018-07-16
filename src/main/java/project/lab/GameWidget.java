@@ -1,6 +1,7 @@
 package project.lab;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -87,6 +88,7 @@ public class GameWidget extends StyledWidget implements Animation {
 	private int ballonY = 0;
 	private int difficulty = 0;
 	public static int goalScored = 0;
+	public static ArrayList scoreList = new ArrayList();
 	private int missed = 0;
 	private final Timer timer;
 
@@ -300,6 +302,9 @@ public class GameWidget extends StyledWidget implements Animation {
 		} else {
 			this.missed++;
 			if (this.missed >= 10) {
+				this.goalScored = 0;
+				Integer e = new Integer(this.goalScored);
+				this.scoreList.add(e);
 				this.missed = 0;
 				ProjectActivity.show(new ProjectGameOver(this.goalScored, this.difficulty));
 			}

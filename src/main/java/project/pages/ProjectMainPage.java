@@ -17,6 +17,7 @@ import ej.widget.container.List;
 import ej.widget.container.Split;
 import ej.widget.listener.OnClickListener;
 import ej.widget.navigation.page.Page;
+import project.lab.GameWidget;
 import project.lab.ProjectActivity;
 
 /**
@@ -70,11 +71,7 @@ public class ProjectMainPage extends Page {
 			@Override
 			public void onClick() {
 				// TODO Auto-generated method stub
-				ArrayList a = new ArrayList();
-				for (int i = 0; i <= 5; i++) {
-					a.add(new String("test"));
-					a.add(new String("test2"));
-				}
+				ArrayList a = GameWidget.scoreList;
 
 				ProjectActivity.show(new ProjectGameScorePage(a));
 
