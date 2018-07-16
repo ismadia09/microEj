@@ -19,6 +19,7 @@ import ej.style.container.Rectangle;
 import ej.style.util.StyleHelper;
 import ej.widget.StyledWidget;
 import project.model.CircularBoundedRangeModel;
+import project.pages.ProjectGamePage;
 
 /**
  * A personalised widget.
@@ -83,10 +84,11 @@ public class GameWidget extends StyledWidget implements Animation {
 	private int goalY = 0;
 	private int ballonX = 0;
 	private int ballonY = 0;
+	private int difficulty = 0;
 	public static int goalScored = 0;
 	private final Timer timer;
 
-	public GameWidget() {
+	public GameWidget(int difficulty) {
 		try {
 			this.but = Image.createImage("/images/cage.png");
 			this.ball = Image.createImage("/images/ball.png");
@@ -94,6 +96,7 @@ public class GameWidget extends StyledWidget implements Animation {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		this.difficulty = difficulty;
 		this.model = new CircularBoundedRangeModel(0, 1000, 1000);
 		this.timer = new Timer();
 		this.timer.scheduleAtFixedRate(new TimerTask() {
@@ -104,7 +107,7 @@ public class GameWidget extends StyledWidget implements Animation {
 				System.out.println(goalCoordinates);
 				initGoalsPosition();
 			}
-		}, 100 * 10, 100 * 10);
+		}, 100 * this.difficulty, 100 * this.difficulty);
 	}
 
 	@Override
@@ -119,6 +122,8 @@ public class GameWidget extends StyledWidget implements Animation {
 			this.goalX = g.getClipWidth() / 2;
 			this.goalY = g.getClipHeight() / 2;
 		}
+		String nombreDeButs = "Nombre de buts : " + this.goalScored;
+		// g.drawString(nombreDeButs, this.goalX, this.goalY, GraphicsContext.TOP | GraphicsContext.LEFT);
 		g.drawImage(this.background, 0, 0, GraphicsContext.TOP | GraphicsContext.LEFT);
 		g.drawImage(this.but, this.goalX, this.goalY, GraphicsContext.TOP | GraphicsContext.LEFT);
 		g.drawImage(this.ball, this.ballonX, this.ballonY, GraphicsContext.HCENTER | GraphicsContext.VCENTER);
@@ -286,7 +291,8 @@ public class GameWidget extends StyledWidget implements Animation {
 
 	private void game(boolean scored) {
 		if (scored == true) {
-			this.goalScored++;
+			// this.goalScored++;
+			ProjectGamePage.buts = this.goalScored++;
 			System.out.println("nombre de buts");
 			System.out.println(this.goalScored);
 		}

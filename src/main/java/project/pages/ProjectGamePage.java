@@ -20,8 +20,11 @@ import project.lab.ProjectActivity;
 public class ProjectGamePage extends Page {
 
 	Split sp = new Split();
+	public static int buts = 0;
+	public static int difficulty = 20;
 
-	public ProjectGamePage() {
+	public ProjectGamePage(int difficulty) {
+		this.difficulty = difficulty;
 		this.sp = new Split(false, (float) 0.10);
 		// Gameplay gp = new Gameplay();
 		Split headerContainer = new Split(true, 0.25f);
@@ -35,10 +38,16 @@ public class ProjectGamePage extends Page {
 				ProjectActivity.home();
 			}
 		});
+
+		Split scoreContainer = new Split(true, 0.5f);
+		String scoreString = "Nombre de buts : " + GameWidget.goalScored;
+		Label score = new Label(scoreString);
+		scoreContainer.setFirst(title);
+		scoreContainer.setLast(score);
 		headerContainer.setFirst(sback);
-		headerContainer.setLast(title);
+		headerContainer.setLast(scoreContainer);
 		this.sp.setFirst(headerContainer);
-		this.sp.setLast(new GameWidget());
+		this.sp.setLast(new GameWidget(this.difficulty));
 		setWidget(this.sp);
 	}
 

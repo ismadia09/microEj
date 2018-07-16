@@ -48,15 +48,19 @@ public class ProjectMainPage extends Page {
 		ButtonWrapper scores = new ButtonWrapper();
 		scores.setWidget(new Label("SCORES"));
 
+		ButtonWrapper settings = new ButtonWrapper();
+		settings.setWidget(new Label("SETTINGS"));
+
 		Btnlist.add(jouer);
 		Btnlist.add(scores);
+		Btnlist.add(settings);
 
 		jouer.addOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick() {
 				// TODO Auto-generated method stub
-				ProjectActivity.show(new ProjectGamePage());
+				ProjectActivity.show(new ProjectGamePage(20));
 
 			}
 		});
@@ -73,6 +77,16 @@ public class ProjectMainPage extends Page {
 				}
 
 				ProjectActivity.show(new ProjectGameScorePage(a));
+
+			}
+		});
+
+		settings.addOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick() {
+				// TODO Auto-generated method stub
+				ProjectActivity.show(new ProjectGameSettings());
 
 			}
 		});
