@@ -14,7 +14,6 @@ import ej.mwt.MWT;
 import ej.mwt.Panel;
 import ej.style.Stylesheet;
 import ej.style.background.SimpleRoundedPlainBackground;
-import ej.style.border.ComplexRectangularBorder;
 import ej.style.outline.SimpleOutline;
 import ej.style.selector.ClassSelector;
 import ej.style.selector.TypeSelector;
@@ -55,8 +54,8 @@ public class ProjectActivity implements Activity {
 		btnStyle.setMargin(myOutline);
 		SimpleRoundedPlainBackground myBackground = new SimpleRoundedPlainBackground(20);
 		btnStyle.setBackground(myBackground);
-		btnStyle.setBackgroundColor(Colors.RED);
-		btnStyle.setForegroundColor(Colors.YELLOW);
+		btnStyle.setBackgroundColor(Colors.GREEN);
+		btnStyle.setForegroundColor(Colors.WHITE);
 		btnStyle.setAlignment(GraphicsContext.HCENTER | GraphicsContext.VCENTER);
 		// Rule for labels child of buttons
 		TypeSelector lblSel = new TypeSelector(Label.class);
@@ -70,14 +69,14 @@ public class ProjectActivity implements Activity {
 		Stylesheet sts = StyleHelper.getStylesheet();
 		EditableStyle titleStyle = new EditableStyle();
 
-		titleStyle.setBackgroundColor(Colors.SILVER);
-		titleStyle.setForegroundColor(Colors.BLACK);
+		titleStyle.setBackgroundColor(Colors.WHITE);
+		titleStyle.setForegroundColor(Colors.GREEN);
 		titleStyle.setAlignment(GraphicsContext.HCENTER | GraphicsContext.VCENTER);
 
-		ComplexRectangularBorder titleBorder = new ComplexRectangularBorder();
-		titleBorder.setBottom(2);
-		titleStyle.setBorder(titleBorder);
-		titleStyle.setBorderColor(Colors.GRAY);
+		/*
+		 * ComplexRectangularBorder titleBorder = new ComplexRectangularBorder(); titleBorder.setBottom(2);
+		 * titleStyle.setBorder(titleBorder); titleStyle.setBorderColor(Colors.GRAY);
+		 */
 
 		ClassSelector titleSelector = new ClassSelector("TITLE");
 		sts.addRule(titleSelector, titleStyle);
@@ -88,7 +87,7 @@ public class ProjectActivity implements Activity {
 		Stylesheet sts = StyleHelper.getStylesheet();
 		EditableStyle itemStyle = new EditableStyle();
 
-		itemStyle.setForegroundColor(Colors.RED);
+		itemStyle.setForegroundColor(Colors.GREEN);
 		itemStyle.setAlignment(GraphicsContext.HCENTER | GraphicsContext.VCENTER);
 
 		ClassSelector itemSelector = new ClassSelector("ITEM");

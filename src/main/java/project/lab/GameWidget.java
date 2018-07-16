@@ -83,6 +83,7 @@ public class GameWidget extends StyledWidget implements Animation {
 	private int goalY = 0;
 	private int ballonX = 0;
 	private int ballonY = 0;
+	public static int goalScored = 0;
 	private final Timer timer;
 
 	public GameWidget() {
@@ -103,7 +104,7 @@ public class GameWidget extends StyledWidget implements Animation {
 				System.out.println(goalCoordinates);
 				initGoalsPosition();
 			}
-		}, 1000 * 2, 1000 * 2);
+		}, 100 * 10, 100 * 10);
 	}
 
 	@Override
@@ -120,7 +121,7 @@ public class GameWidget extends StyledWidget implements Animation {
 		}
 		g.drawImage(this.background, 0, 0, GraphicsContext.TOP | GraphicsContext.LEFT);
 		g.drawImage(this.but, this.goalX, this.goalY, GraphicsContext.TOP | GraphicsContext.LEFT);
-		g.drawImage(this.ball, this.ballonX, this.ballonY, GraphicsContext.TOP | GraphicsContext.LEFT);
+		g.drawImage(this.ball, this.ballonX, this.ballonY, GraphicsContext.HCENTER | GraphicsContext.VCENTER);
 
 	}
 
@@ -247,6 +248,9 @@ public class GameWidget extends StyledWidget implements Animation {
 				// getRelativeY(pointer.getAbsoluteY())));
 				this.ballonX = pointer.getX();
 				this.ballonY = pointer.getY();
+				boolean scored = checkIfPlayerScores();
+				System.out.println(scored);
+				game(scored);
 				repaint();
 				return true;
 			}
@@ -257,11 +261,35 @@ public class GameWidget extends StyledWidget implements Animation {
 	private void initGoalsPosition() {
 		int minX = 0;
 		int minY = 0;
-		int maxX = 450;
-		int maxY = 252;
+		int maxX = 420;
+		int maxY = 200;
 		this.goalX = (int) (minX + (Math.random() * (maxX - minX)));
 		this.goalY = (int) (minY + (Math.random() * (maxY - minY)));
+		repaint();
 
+	}
+
+	private boolean checkIfPlayerScores() {
+		// int centerBallX = this.ballonX + this.ball.getWidth();
+		// int centerBallY = this.ballonY + this.ball.getHeight();
+
+		int centerGoalX = this.goalX + this.but.getWidth();
+		int centerGoalY = this.goalY + this.but.getHeight();
+		double rayonBut = this.but.getWidth() * 0.70;
+		double distanceCenterGoal = Math.sqrt(((this.ballonX - centerGoalX) * (this.ballonX - centerGoalX))
+				+ ((this.ballonY - centerGoalY) * (this.ballonY - centerGoalY)));
+		System.out.println(rayonBut);
+		System.out.println(distanceCenterGoal);
+
+		return distanceCenterGoal < rayonBut;
+	}
+
+	private void game(boolean scored) {
+		if (scored == true) {
+			this.goalScored++;
+			System.out.println("nombre de buts");
+			System.out.println(this.goalScored);
+		}
 	}
 
 }

@@ -32,7 +32,7 @@ public class ProjectMainPage extends Page {
 
 	public ProjectMainPage() {
 
-		this.container = new Split(false, (float) 0.8);
+		this.container = new Split(false, (float) 0.2);
 		List Btnlist = new List(false);
 
 		Label title = new Label("BIENVENUE SUR LE JEU");
@@ -92,8 +92,8 @@ public class ProjectMainPage extends Page {
 		this.GRD.setFirst(exitBtn);
 		this.GRD.setLast(title);
 
-		this.container.setFirst(Btnlist);
-		this.container.setLast(this.GRD);
+		this.container.setLast(Btnlist);
+		this.container.setFirst(this.GRD);
 
 		setWidget(this.container);
 
