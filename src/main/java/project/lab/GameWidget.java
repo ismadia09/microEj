@@ -101,6 +101,7 @@ public class GameWidget extends StyledWidget implements Animation {
 			e.printStackTrace();
 		}
 		this.difficulty = difficulty;
+		this.goalScored = 0;
 		this.model = new CircularBoundedRangeModel(0, 1000, 1000);
 		this.timer = new Timer();
 		this.timer.scheduleAtFixedRate(new TimerTask() {
@@ -301,8 +302,7 @@ public class GameWidget extends StyledWidget implements Animation {
 			System.out.println(this.goalScored);
 		} else {
 			this.missed++;
-			if (this.missed >= 10) {
-				this.goalScored = 0;
+			if (this.missed >= 5) {
 				Integer e = new Integer(this.goalScored);
 				this.scoreList.add(e);
 				this.missed = 0;

@@ -6,6 +6,8 @@
  */
 package project.pages;
 
+import java.util.ArrayList;
+
 import ej.widget.basic.Button;
 import ej.widget.basic.Label;
 import ej.widget.composed.ButtonWrapper;
@@ -13,6 +15,7 @@ import ej.widget.container.List;
 import ej.widget.container.Split;
 import ej.widget.listener.OnClickListener;
 import ej.widget.navigation.page.Page;
+import project.lab.GameWidget;
 import project.lab.ProjectActivity;
 
 /**
@@ -21,7 +24,7 @@ import project.lab.ProjectActivity;
 public class ProjectGameOver extends Page {
 	Button BT1 = new Button("Diallo Ismael Main Page");
 	Button BT2 = new Button("Exit me");
-	Split GRD = new Split(true, 0.25f);
+	Split GRD = new Split(true, 0.000000001f);
 
 	private final Split container;
 
@@ -50,7 +53,11 @@ public class ProjectGameOver extends Page {
 		ButtonWrapper menuPrincipal = new ButtonWrapper();
 		menuPrincipal.setWidget(new Label("MENU PRINCIPAL"));
 
+		ButtonWrapper scores = new ButtonWrapper();
+		scores.setWidget(new Label("SCORES"));
+
 		Btnlist.add(rejouer);
+		Btnlist.add(scores);
 		Btnlist.add(menuPrincipal);
 
 		rejouer.addOnClickListener(new OnClickListener() {
@@ -72,10 +79,21 @@ public class ProjectGameOver extends Page {
 			}
 		});
 
+		scores.addOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick() {
+				// TODO Auto-generated method stub
+				ArrayList scores = GameWidget.scoreList;
+				ProjectActivity.show(new ProjectGameScorePage(scores));
+
+			}
+		});
+
 		this.GRD.setFirst(sback);
 		this.GRD.setLast(title);
 
-		Split gameOverContainer = new Split(false, (float) 0.7);
+		Split gameOverContainer = new Split(false, (float) 0.5);
 
 		String gameOverString = "VOUS AVEZ PERDU \n Vous avez marqué " + score + " buts";
 		Label gameOver = new Label(gameOverString);

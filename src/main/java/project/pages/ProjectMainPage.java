@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 import ej.components.dependencyinjection.ServiceLoaderFactory;
 import ej.exit.ExitHandler;
-import ej.widget.basic.Button;
 import ej.widget.basic.Label;
 import ej.widget.composed.ButtonWrapper;
 import ej.widget.container.List;
@@ -25,8 +24,6 @@ import project.lab.ProjectActivity;
  */
 public class ProjectMainPage extends Page {
 
-	Button BT1 = new Button("Diallo Ismael Main Page");
-	Button BT2 = new Button("Exit me");
 	Split GRD = new Split(true, 0.25f);
 
 	private final Split container;
@@ -61,7 +58,7 @@ public class ProjectMainPage extends Page {
 			@Override
 			public void onClick() {
 				// TODO Auto-generated method stub
-				ProjectActivity.show(new ProjectGamePage(20));
+				ProjectActivity.show(new ProjectGamePage(10));
 
 			}
 		});
@@ -71,9 +68,9 @@ public class ProjectMainPage extends Page {
 			@Override
 			public void onClick() {
 				// TODO Auto-generated method stub
-				ArrayList a = GameWidget.scoreList;
+				ArrayList scores = GameWidget.scoreList;
 
-				ProjectActivity.show(new ProjectGameScorePage(a));
+				ProjectActivity.show(new ProjectGameScorePage(scores));
 
 			}
 		});
